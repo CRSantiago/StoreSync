@@ -1,6 +1,6 @@
-import { IStorageHandler } from '../interfaces/IStorageHandler.ts'
+import { IStorageHandler } from '../interfaces/IStorageHandler'
 
-class LocalStorageHandler implements IStorageHandler {
+export class LocalStorageHandler implements IStorageHandler {
   isAvailable(): boolean {
     try {
       const test = '__storage_test__'
@@ -19,7 +19,7 @@ class LocalStorageHandler implements IStorageHandler {
       localStorage.setItem(key, valueToStore)
       return 'Value stored successfully'
     } catch (e) {
-      return e.name
+        return (e as Error).name
     }
   }
 
@@ -42,7 +42,7 @@ class LocalStorageHandler implements IStorageHandler {
       window.localStorage.removeItem(key)
       return 'Value removed successfully'
     } catch (e) {
-      return e.name
+      return (e as Error).name
     }
   }
 }
