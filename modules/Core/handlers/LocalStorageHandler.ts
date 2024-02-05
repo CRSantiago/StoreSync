@@ -1,4 +1,4 @@
-import { IStorageHandler } from '../interfaces/IStorageHandler'
+import { IStorageHandler } from '../interfaces/IStorageHandler.js'
 
 export class LocalStorageHandler implements IStorageHandler {
   isAvailable(): boolean {

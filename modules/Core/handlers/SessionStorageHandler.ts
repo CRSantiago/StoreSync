@@ -1,4 +1,4 @@
-import { IStorageHandler } from "../interfaces/IStorageHandler"
+import { IStorageHandler } from "../interfaces/IStorageHandler.js"
 
 export class SessionStorageHandler implements IStorageHandler {
   isAvailable(): boolean {

@@ -1,7 +1,7 @@
 // core.js
-import { SessionStorageHandler } from "./handlers/SessionStorageHandler"
-import { LocalStorageHandler } from "./handlers/LocalStorageHandler"
-import { IStorageHandler } from "./interfaces/IStorageHandler"
+import { SessionStorageHandler } from "./handlers/SessionStorageHandler.js"
+import { LocalStorageHandler } from "./handlers/LocalStorageHandler.js"
+import { IStorageHandler } from "./interfaces/IStorageHandler.js"
 
 // Strategy object mapping storage types to their handlers
 const storageStrategy: { [key: string]: IStorageHandler } = {
