@@ -1,3 +1,4 @@
+import { replacer, reviver } from '../utils/serialization.js';
 export class LocalStorageHandler {
     isAvailable() {
         try {
@@ -11,8 +12,8 @@ export class LocalStorageHandler {
         }
     }
     setItem(key, value) {
-        const valueToStore = typeof value === 'object' ? JSON.stringify(value) : value;
         try {
+            const valueToStore = typeof value === 'object' ? JSON.stringify(value, replacer) : value;
             localStorage.setItem(key, valueToStore);
             return 'Value stored successfully';
         }
@@ -22,12 +23,13 @@ export class LocalStorageHandler {
     }
     getItem(key) {
         const value = localStorage.getItem(key);
+        console.log(value);
         if (value === null || value === undefined) {
             return 'No value found for the given key';
         }
         try {
             // Attempt to parse JSON
-            return JSON.parse(value);
+            return JSON.parse(value, reviver);
         }
         catch (e) {
             // Return as is if not JSON

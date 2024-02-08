@@ -1,4 +1,5 @@
 import { IStorageHandler } from '../interfaces/IStorageHandler.js'
+import { replacer, reviver } from '../utils/serialization.js'
 
 export class LocalStorageHandler implements IStorageHandler {
   isAvailable(): boolean {
@@ -12,25 +13,26 @@ export class LocalStorageHandler implements IStorageHandler {
     }
   }
 
-  setItem(key: string, value: string): string {
-    const valueToStore =
-      typeof value === 'object' ? JSON.stringify(value) : value
+  setItem(key: string, value: any): string {
     try {
+      const valueToStore =
+        typeof value === 'object' ? JSON.stringify(value, replacer) : value
       localStorage.setItem(key, valueToStore)
       return 'Value stored successfully'
     } catch (e) {
-        return (e as Error).name
+      return (e as Error).name
     }
   }
 
   getItem(key: string): string | null {
     const value = localStorage.getItem(key)
+    console.log(value)
     if (value === null || value === undefined) {
       return 'No value found for the given key'
     }
     try {
       // Attempt to parse JSON
-      return JSON.parse(value)
+      return JSON.parse(value, reviver)
     } catch (e) {
       // Return as is if not JSON
       return value
