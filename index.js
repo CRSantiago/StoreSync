@@ -11,8 +11,7 @@ const testObject = {
     startDate: new Date(2020, 0, 1), // Specific date for nested object
     description: 'Nested object with a date',
   },
+  largeInt: BigInt(9007199254740991) + 1n, // A big int
 }
-console.log(testObject.createdAt)
 console.log(storage.setItem('test', testObject))
-const returnedObj = storage.getItem('test')
-console.log(returnedObj.createdAt)
+console.log(storage.getItem('test'))

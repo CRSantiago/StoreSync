@@ -23,7 +23,6 @@ export class LocalStorageHandler {
     }
     getItem(key) {
         const value = localStorage.getItem(key);
-        console.log(value);
         if (value === null || value === undefined) {
             return 'No value found for the given key';
         }

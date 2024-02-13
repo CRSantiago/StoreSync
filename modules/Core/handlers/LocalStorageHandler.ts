@@ -26,7 +26,6 @@ export class LocalStorageHandler implements IStorageHandler {
 
   getItem(key: string): string | null {
     const value = localStorage.getItem(key)
-    console.log(value)
     if (value === null || value === undefined) {
       return 'No value found for the given key'
     }
