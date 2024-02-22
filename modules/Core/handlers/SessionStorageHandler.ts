@@ -1,9 +1,9 @@
-import { IStorageHandler } from "../interfaces/IStorageHandler.js"
+import { IStorageHandler } from '../interfaces/IStorageHandler.js'
 
 export class SessionStorageHandler implements IStorageHandler {
   isAvailable(): boolean {
     try {
-      const test = "__storage_test__"
+      const test = '__storage_test__'
       window.sessionStorage.setItem(test, test)
       window.sessionStorage.removeItem(test)
       return true
@@ -12,12 +12,12 @@ export class SessionStorageHandler implements IStorageHandler {
     }
   }
 
-  setItem(key: string, value: string): string {
+  async setItem(key: string, value: string): Promise<string> {
     const valueToStore =
-      typeof value === "object" ? JSON.stringify(value) : value
+      typeof value === 'object' ? JSON.stringify(value) : value
     try {
       sessionStorage.setItem(key, valueToStore)
-      return "Value stored successfully"
+      return 'Value stored successfully'
     } catch (e) {
       return (e as Error).name
     }
@@ -26,7 +26,7 @@ export class SessionStorageHandler implements IStorageHandler {
   getItem(key: string): string | null {
     const value = sessionStorage.getItem(key)
     if (value === null || value === undefined) {
-      return "No value found for the given key"
+      return 'No value found for the given key'
     }
     try {
       // Attempt to parse JSON
@@ -40,7 +40,7 @@ export class SessionStorageHandler implements IStorageHandler {
   removeItem(key: string): string {
     try {
       window.sessionStorage.removeItem(key)
-      return "Value removed successfully"
+      return 'Value removed successfully'
     } catch (e) {
       return (e as Error).name
     }

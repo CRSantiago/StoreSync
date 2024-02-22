@@ -12,6 +12,15 @@ const testObject = {
     description: 'Nested object with a date',
   },
   largeInt: BigInt(9007199254740991) + 1n, // A big int
+  sensitiveData: "I'm a secret",
 }
-console.log(storage.setItem('test', testObject))
+try {
+  const result = await storage.setItem('test', testObject, {
+    encrypt: true,
+    encryptFields: ['sensitiveData'], // Corrected typo here
+  })
+  console.log(result)
+} catch (e) {
+  console.error('Error setting item:', e)
+}
 console.log(storage.getItem('test'))

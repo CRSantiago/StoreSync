@@ -24,7 +24,7 @@ export class StorageManager {
     }
   }
 
-  setItem(key: string, value: any): string {
+  setItem(key: string, value: any): Promise<string> {
     return this.handler.setItem(key, value)
   }
 
